@@ -1,11 +1,12 @@
-// src/components/DesktopNavbar.jsx
 import logoUrl from '../../assets/LOGORN.png';
+import { Heart } from 'lucide-react';
 
 export default function DesktopNavbar({ currentPage, onNavigate }) {
   const navItems = [
     { id: 'home', label: 'Beranda' },
     { id: 'makanan', label: 'Makanan' },
     { id: 'minuman', label: 'Minuman' },
+    { id: 'favorites', label: 'Favorit' },
     { id: 'profile', label: 'Profile' }
   ];
 
@@ -24,7 +25,10 @@ export default function DesktopNavbar({ currentPage, onNavigate }) {
               />
               {/* Decorative particles */}
               <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-blue-400 rounded-full animate-ping opacity-60" />
-              <div className="absolute -bottom-0.5 -left-0.5 w-1 h-1 bg-blue-300 rounded-full animate-ping opacity-50" style={{ animationDelay: '300ms' }} />
+              <div
+                className="absolute -bottom-0.5 -left-0.5 w-1 h-1 bg-blue-300 rounded-full animate-ping opacity-50"
+                style={{ animationDelay: '300ms' }}
+              />
             </div>
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 bg-clip-text text-transparent">
@@ -48,11 +52,22 @@ export default function DesktopNavbar({ currentPage, onNavigate }) {
                     : 'text-slate-600 border-transparent hover:text-blue-500 hover:border-blue-300'
                 }`}
               >
-                {item.label}
+                {item.id === 'favorites' ? (
+                  <span className="flex items-center space-x-1">
+                    <Heart
+                      size={16}
+                      className={`${
+                        currentPage === 'favorites' ? 'fill-red-500 text-red-500' : 'text-gray-400'
+                      }`}
+                    />
+                    <span>{item.label}</span>
+                  </span>
+                ) : (
+                  item.label
+                )}
               </button>
             ))}
           </div>
-         
         </div>
       </div>
     </nav>

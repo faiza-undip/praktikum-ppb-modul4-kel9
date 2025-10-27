@@ -2,7 +2,7 @@
 import { Clock, Star, Coffee } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
-export default function FeaturedMinumanSection({ featuredMinuman }) {
+export default function FeaturedMinumanSection({ featuredMinuman, onSelect }) {
   const [visibleMinuman, setVisibleMinuman] = useState(new Set());
   const minumanRefs = useRef([]);
 
@@ -44,6 +44,9 @@ export default function FeaturedMinumanSection({ featuredMinuman }) {
           <div 
             key={recipe.id}
             ref={el => minumanRefs.current[index] = el}
+             onClick={() => {
+              if (onSelect) onSelect(recipe)
+            }}
             className={`group transform transition-all duration-700 ${
               visibleMinuman.has(index) 
                 ? 'translate-y-0 opacity-100' 

@@ -2,7 +2,7 @@
 import { Clock, Star, ChefHat } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
-export default function FeaturedMakananSection({ featuredMakanan }) {
+export default function FeaturedMakananSection({ featuredMakanan, onSelect }) {
   const [visibleMakanan, setVisibleMakanan] = useState(new Set());
   const makananRefs = useRef([]);
 
@@ -44,6 +44,9 @@ export default function FeaturedMakananSection({ featuredMakanan }) {
           <div 
             key={recipe.id} 
             ref={el => makananRefs.current[index] = el}
+            onClick={() => {
+              if (onSelect) onSelect(recipe)
+            }}
             className={`group transform transition-all duration-700 ${
               visibleMakanan.has(index) 
                 ? 'translate-y-0 opacity-100' 
